@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Meine KI-Webseite</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #1a1a2e;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 20px;
+      background: #e94560;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #c73650;
+    }
+
+    #webcam-container {
+      margin: 20px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    #label-container {
+      max-width: 450px;
+      margin: 20px auto;
+    }
+
+    .bar {
+      height: 35px;
+      margin: 8px 0;
+      background: #e94560;
+      border-radius: 8px;
+      text-align: left;
+      padding: 6px 14px;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 23px;
+      min-width: 150px;
+      transition: width 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .status {
+      background: #16213e;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px auto;
+      max-width: 450px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       AENDERE HIER DEINEN TITEL!
+       ============================================= -->
+  <h1>🤖 Meine KI erkennt: ???</h1>
+
+  <p class="subtitle">Trainiert mit Google Teachable Machine</p>
+
+  <button onclick="start()">🚀 KI starten!</button>
+
+  <div id="status" class="status">Klicke auf den Button um zu starten!</div>
+  <div id="webcam-container"></div>
+  <div id="label-container"></div>
+
+  <script>
+    // =============================================
+    // HIER DEINE MODELL-URL EINFUEGEN!
+    // Gehe zu Teachable Machine -> Export -> Upload
+    // Kopiere die URL und fuege sie hier ein:
+    // =============================================
+    const URL = "DEINE_MODELL_URL_HIER";
+
+    let model, webcam, maxPredictions;
+
+    async function start() {
+      document.getElementById("status").textContent =
+        "Modell wird geladen...";
+
+      const modelURL = URL + "model.json";
+      const metadataURL = URL + "metadata.json";
+
+      try {
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        webcam = new tmImage.Webcam(300, 300, true);
+        await webcam.setup();
+        await webcam.play();
+        document.getElementById("webcam-container")
+          .appendChild(webcam.canvas);
+
+        const labelContainer = document.getElementById("label-container");
+        labelContainer.innerHTML = "";
+        for (let i = 0; i < maxPredictions; i++) {
+          const div = document.createElement("div");
+          div.className = "bar";
+          labelContainer.appendChild(div);
+        }
+
+        document.getElementById("status").textContent =
+          "KI laeuft! Halte etwas vor die Kamera!";
+
+        window.requestAnimationFrame(loop);
+      } catch(e) {
+        document.getElementById("status").textContent =
+          "Fehler! Prüfe ob deine Modell-URL stimmt.";
+        console.error(e);
+      }
+    }
+
+    async function loop() {
+      webcam.update();
+      await predict();
+      window.requestAnimationFrame(loop);
+    }
+
+    async function predict() {
+      const prediction = await model.predict(webcam.canvas);
+      const labels = document.getElementById("label-container").children;
+
+      for (let i = 0; i < maxPredictions; i++) {
+        const percent = Math.round(prediction[i].probability * 100);
+        labels[i].style.width = percent + "%";
+        labels[i].textContent =
+          prediction[i].className + ": " + percent + "%";
+      }
+    }
+  </script>
+
+</body>
+</html>

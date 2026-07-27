@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiCamp · Trainiere deine eigene KI!</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0 1rem 3rem; background: #f8fafc; color: #1e293b; }
+    header { background: #0d9488; color: white; text-align: center; padding: 2.4rem 1rem; margin: 0 -1rem 2rem; }
+    header h1 { margin: 0; font-size: 2.2rem; }
+    header p { margin: 0.4rem 0 0; opacity: 0.85; }
+    .wrap { max-width: 900px; margin: 0 auto; }
+    .startbox { background: #ccfbf1; border-radius: 16px; padding: 1.4rem 1.6rem; margin: 0 0 2.2rem; }
+    .startbox h2 { margin: 0.1rem 0 0.9rem; border: none; color: #0f766e; }
+    .startbox h3 { margin: 1.1rem 0 0.6rem; color: #0f766e; font-size: 1rem; }
+    .res-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .res { background: #0d9488; color: #fff; text-decoration: none; padding: 0.6rem 1rem; border-radius: 10px; font-weight: 600; }
+    .res:hover { background: #0f766e; }
+    .res.folie { background: #fff; color: #0d9488; border: 2px solid #99f6e4; padding: 0.45rem 0.85rem; font-weight: 700; }
+    .res.folie:hover { border-color: #0d9488; }
+    .hint { color: #475569; font-size: 0.92rem; margin: 1rem 0 0; }
+    h2 { color: #0f766e; margin-top: 2rem; border-bottom: 3px solid #ccfbf1; padding-bottom: 0.3rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .card { display: block; background: white; border: 2px solid #ccfbf1; border-radius: 14px; padding: 1.1rem; text-decoration: none; color: inherit; transition: transform .1s, border-color .1s; }
+    .card:hover { transform: translateY(-3px); border-color: #0d9488; }
+    .emoji { font-size: 2.4rem; }
+    .name { font-weight: 700; color: #0d9488; margin-top: 0.3rem; }
+    .desc { font-size: 0.9rem; color: #64748b; margin-top: 0.2rem; }
+    footer { text-align: center; color: #94a3b8; margin-top: 3rem; font-size: 0.9rem; }
+    .ablauf { background: white; border: 2px solid #ccfbf1; border-radius: 14px; padding: 1.2rem 1.6rem; margin: 1rem 0 2rem; }
+    .ablauf table { width: 100%; border-collapse: collapse; }
+    .ablauf td { padding: 0.4rem 0.6rem; border-bottom: 1px solid #f0fdfa; }
+    .ablauf td:first-child { font-weight: 700; color: #0d9488; white-space: nowrap; width: 90px; }
+    .ablauf tr:last-child td { border: none; }
+    .ablauf tr.pause { background: #fef3c7; }
+    .ablauf tr.pause td:first-child { color: #d97706; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🤖 Trainiere deine eigene KI!</h1>
+    <p>DigiCamp · Nachmittagsworkshop mit Teachable Machine</p>
+  </header>
+  <div class="wrap">
+    <div class="startbox">
+      <h2>Material</h2>
+      <div class="res-grid">
+        <a class="res" href="https://teachablemachine.withgoogle.com" target="_blank" rel="noopener">🧠 Teachable Machine</a>
+        <a class="res" href="https://quickdraw.withgoogle.com" target="_blank" rel="noopener">🎨 Quick, Draw!</a>
+        <a class="res" href="vorlage/meine-ki-webseite.html" download>📄 HTML Vorlage herunterladen</a>
+        <a class="res" href="vorlage/schere-stein-papier-spiel.html" download>🎮 Schere-Stein-Papier Spiel</a>
+      </div>
+      <h3>Folien &amp; Unterlagen</h3>
+      <div class="res-grid">
+        <a class="res folie" href="folien/KI-Workshop-Folien.pdf" target="_blank" rel="noopener">Folien (PDF)</a>
+        <a class="res folie" href="checkliste.html">Checkliste</a>
+      </div>
+      <p class="hint">Öffne Teachable Machine im Chrome Browser. Kein Account nötig!</p>
+    </div>
+
+    <h2>Ablauf</h2>
+    <div class="ablauf">
+      <table>
+        <tr>
+          <td>Was ist KI? Quick, Draw! Demo</td>
+        </tr>
+        <tr>
+          <td>Schere-Stein-Papier gemeinsam trainieren, Partner-Test, Nichts-Klasse</td>
+        </tr>
+        <tr>
+          <td>Eigenes KI Projekt bauen</td>
+        </tr>
+        <tr class="pause">
+          <td>☕ Pause (Browser-Tab offen lassen!)</td>
+        </tr>
+        <tr>
+          <td>Modell exportieren und in HTML Webseite einbauen</td>
+        </tr>
+        <tr>
+          <td>Präsentation und Reflexion</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>Wichtige Links</h2>
+    <div class="grid">
+      <a class="card" href="https://teachablemachine.withgoogle.com" target="_blank" rel="noopener">
+        <div class="emoji">🧠</div>
+        <div class="name">Teachable Machine</div>
+        <div class="desc">Hier trainierst du dein KI Modell.</div>
+      </a>
+      <a class="card" href="https://quickdraw.withgoogle.com" target="_blank" rel="noopener">
+        <div class="emoji">🎨</div>
+        <div class="name">Quick, Draw!</div>
+        <div class="desc">Die KI errät, was du zeichnest.</div>
+      </a>
+      <a class="card" href="vorlage/meine-ki-webseite.html" download>
+        <div class="emoji">📄</div>
+        <div class="name">HTML Vorlage</div>
+        <div class="desc">Diese Datei bearbeitest du im Workshop.</div>
+      </a>
+    </div>
+
+    <h2>Tipps für gute Trainingsbilder</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="emoji">🧱</div>
+        <div class="name">Leere Wand</div>
+        <div class="desc">Stell dich vor eine einfarbige Wand. Wenig Hintergrund!</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🔍</div>
+        <div class="name">Nah dran</div>
+        <div class="desc">Hand oder Objekt soll das Bild möglichst ausfüllen.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">☀️</div>
+        <div class="name">Gutes Licht</div>
+        <div class="desc">Nicht mit dem Rücken zum Fenster sitzen.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🔄</div>
+        <div class="name">Bewegen!</div>
+        <div class="desc">Drehen, kippen, näher, weiter weg. Mindestens 50 Bilder!</div>
+      </div>
+    </div>
+
+    <h2>Projektideen</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="emoji">🤪</div>
+        <div class="name">Emotionen ⭐</div>
+        <div class="desc"><b>Klassen:</b> Fröhlich, Traurig, Überrascht, Wütend<br><b>Tipp:</b> Übertreibe deine Gesichtsausdrücke richtig!</div>
+      </div>
+      <div class="card">
+        <div class="emoji">✏️</div>
+        <div class="name">Schulsachen ⭐</div>
+        <div class="desc"><b>Klassen:</b> Stift, Radiergummi, Schere, Lineal<br><b>Tipp:</b> Verschiedene Winkel und Abstände.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">👋</div>
+        <div class="name">Handzeichen ⭐</div>
+        <div class="desc"><b>Klassen:</b> Daumen hoch, Peace, Stopp, Winken<br><b>Tipp:</b> Probiere beide Hände aus.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🎨</div>
+        <div class="name">Farben ⭐⭐</div>
+        <div class="desc"><b>Klassen:</b> Rote, blaue, grüne, gelbe Gegenstände<br><b>Tipp:</b> Nimm mehrere verschiedene Dinge pro Farbe.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🦸</div>
+        <div class="name">Superhelden Posen ⭐⭐</div>
+        <div class="desc"><b>Klassen:</b> Stark, Fliegen, Denkerpose, Jubeln<br><b>Tipp:</b> Steh auf, damit die Kamera dich ganz sieht.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🎵</div>
+        <div class="name">Geräusche (Audio!) ⭐⭐</div>
+        <div class="desc"><b>Klassen:</b> Klatschen, Schnipsen, Pfeifen, Stille<br><b>Tipp:</b> Wähle bei "New Project" das Audio Project.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🔤</div>
+        <div class="name">Zahlen erkennen ⭐⭐⭐</div>
+        <div class="desc"><b>Klassen:</b> 0, 1, 2, 3, 4, 5 auf Papier geschrieben<br><b>Tipp:</b> Lass auch andere Kids die Zahlen schreiben.</div>
+      </div>
+      <div class="card">
+        <div class="emoji">🧩</div>
+        <div class="name">Trick die KI! ⭐⭐⭐</div>
+        <div class="desc">Finde etwas, das die KI nicht schaffen kann. Zum Beispiel 3 gegen 4 Finger unterscheiden.</div>
+      </div>
+    </div>
+
+    <footer>DigiCamp · Trainiere deine eigene KI!</footer>
+  </div>
+</body>
+</html>
