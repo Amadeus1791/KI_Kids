@@ -103,6 +103,10 @@
     // =============================================
     const URL = "DEINE_MODELL_URL_HIER";
 
+    // Sicherheitsnetz: haengt einen fehlenden / am Ende automatisch an
+    // und entfernt versehentliche Leerzeichen.
+    const BASIS = URL.trim().replace(/\/*$/, "") + "/";
+
     async function start() {
       document.getElementById("status").textContent =
         "Modell wird geladen...";
@@ -111,8 +115,8 @@
         const recognizer = speechCommands.create(
           "BROWSER_FFT",
           undefined,
-          URL + "model.json",
-          URL + "metadata.json"
+          BASIS + "model.json",
+          BASIS + "metadata.json"
         );
         await recognizer.ensureModelLoaded();
 

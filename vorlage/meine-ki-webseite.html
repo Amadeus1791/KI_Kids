@@ -103,14 +103,18 @@
     // =============================================
     const URL = "DEINE_MODELL_URL_HIER";
 
+    // Sicherheitsnetz: haengt einen fehlenden / am Ende automatisch an
+    // und entfernt versehentliche Leerzeichen.
+    const BASIS = URL.trim().replace(/\/*$/, "") + "/";
+
     let model, webcam, maxPredictions;
 
     async function start() {
       document.getElementById("status").textContent =
         "Modell wird geladen...";
 
-      const modelURL = URL + "model.json";
-      const metadataURL = URL + "metadata.json";
+      const modelURL = BASIS + "model.json";
+      const metadataURL = BASIS + "metadata.json";
 
       try {
         model = await tmImage.load(modelURL, metadataURL);
